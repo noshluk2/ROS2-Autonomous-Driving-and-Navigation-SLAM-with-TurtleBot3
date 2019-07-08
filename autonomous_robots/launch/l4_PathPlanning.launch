@@ -1,0 +1,45 @@
+<launch>
+     <!-- gazebo launch with empty world and loading the new model we have created-->
+    <include file ="$(find gazebo_ros)/launch/empty_world.launch">
+        <arg name="world_name" value="$(find autonomous_robots)/world/office_tb3.world"/>   
+    </include>
+    <!-- uploading urdf robot model into parameter server -->
+    <param name="robot_description" command="$(find xacro)/xacro --inorder $(find turtlebot3_description)/urdf/turtlebot3_waffle_pi.urdf.xacro"/>  
+      
+    <!-- Running the robot moving node -->
+    <node pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py" name="teleop_twist_keyboard">
+    </node>
+
+        <!-- using the map we saved earlier -->
+    <arg name="map_file" value="$(find autonomous_robots)/map/map.yaml"/>
+    
+    <!-- Map_server package is used to handle mapp we saved -->
+    <node pkg="map_server" type="map_server" name="map_server" args="$(arg map_file)"/>
+
+    <!-- Adaptive monto carlo node running -->
+    <include file="$(find turtlebot3_navigation)/launch/amcl.launch"/>
+
+    <!-- publisher transform for all joint and thier inbetween relations -->
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher">
+    <param name ="publish_frequency" type=" double" value="50.0"/>
+    </node>
+    <!-- Setting up the MOVEBASE node and costmaps parameters -->
+    <node pkg="move_base" type="move_base" name="move_base" respawn="false" output="screen" >
+        <param name="base_local_planner" value="dwa_local_planner/DWAPlannerROS"/>
+        <rosparam file="$(find turtlebot3_navigation)/param/costmap_common_params_waffle_pi.yaml" command="load" ns="global_costmap" />
+        <rosparam file="$(find turtlebot3_navigation)/param/costmap_common_params_waffle_pi.yaml" command="load" ns="local_costmap" />
+        <rosparam file="$(find turtlebot3_navigation)/param/local_costmap_params.yaml" command="load"/>
+        <rosparam file="$(find turtlebot3_navigation)/param/global_costmap_params.yaml" command="load"/>
+        <rosparam file="$(find turtlebot3_navigation)/param/move_base_params.yaml" command="load"/>
+        <rosparam file="$(find turtlebot3_navigation)/param/dwa_local_planner_params_waffle_pi.yaml" command="load"/>
+        <remap from="cmd_vel" to="/cmd_vel"/>
+        <remap from="odom" to="odom"/>
+        <param name="DWAPlannerROS/min_vel_x" value="0.0" if ="false"/>
+    </node>  
+
+    <!-- Launching Rviz with saved configuration -->
+
+    <node pkg="rviz" type="rviz" name="rviz" required="true" args="-d $(find turtlebot3_navigation)/rviz/turtlebot3_navigation.rviz"/>
+
+
+</launch>
