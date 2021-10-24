@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- rosrun teleop_twist_keyboard teleop_twist_keyboard.py  cmd_vel:=/turtleBot_1/cmd_vel -->
+
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+   
+  </include>  
+
+  <group ns = "turtleBot_1">
+    <param name="robot_description" command="$(find xacro)/xacro  $(find turtlebot3_description)/urdf/turtlebot3_waffle_pi.urdf.xacro" />
+    
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher_tb1" output="screen">
+      <param name="publish_frequency" type="double" value="50.0" />
+      <param name="tf_prefix" value="turtleBot_1" />
+    </node>
+
+    <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-urdf -model turtleBot_1  -param robot_description" />
+
+  </group>
+
+
+
+
+<group ns = "turtleBot_2">
+    
+  <param name="robot_description" command="$(find xacro)/xacro $(find turtlebot3_description)/urdf/turtlebot3_waffle_pi.urdf.xacro" />
+   
+  <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher_tb2" output="screen">
+      <param name="publish_frequency" type="double" value="50.0" />
+      <param name="tf_prefix" value="turtleBot_2" />
+    </node>
+
+    <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-urdf -model turtleBot_2 -x 1.0 -param robot_description" />
+
+  </group> 
+
+</launch>
