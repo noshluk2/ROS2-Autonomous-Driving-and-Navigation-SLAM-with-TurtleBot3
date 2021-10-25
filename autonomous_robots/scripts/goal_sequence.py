@@ -14,7 +14,7 @@ def movebase_client():
               3.5923 , -1.200 , -0.0010,
               1.4576 , -2.878 , -0.001,
               -1.000 , -2.623 ,-0.0010,
-              0.0029 , 0.0040 , -0.001] # at the end get back to where it was parked :)
+              0.0029 , 0.0040 , -0.001]
 
     goal = MoveBaseGoal()
     goal.target_pose.header.frame_id = "map"
