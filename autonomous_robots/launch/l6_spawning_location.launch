@@ -1,0 +1,12 @@
+<launch>
+    <arg name="x" default="1.0"/>
+    <arg name="y" default="0.0"/>
+    
+    <arg name="sdf_file" value="/home/luqman/catkin_ws/src/autonomous_robots/instruders/coffee_machine/model.sdf"/>
+
+    <node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf" args="-sdf -file $(arg sdf_file) -x $(arg x) -y $(arg y)  -model thief "/>
+    <node name="robot_location_goal" pkg="autonomous_robots" type="go_to_goal.py"  args=" $(arg x)  $(arg y) 0.000"/>
+    <node name="video_recording" pkg="autonomous_robots" type="video_recording.py"  />
+
+
+</launch>
