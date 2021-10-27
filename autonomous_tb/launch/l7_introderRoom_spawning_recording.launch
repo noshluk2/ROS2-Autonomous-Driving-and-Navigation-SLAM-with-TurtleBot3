@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<launch>
+    <arg name="model_name" default="cabinet"/>
+    <arg name="model_path" value="$(find autonomous_tb)/models/$(arg model_name)/model.sdf"/>
+    <arg name="x" default="4.12"/>
+    <arg name="y" default="3.43"/>
+    
+    
+    
+    
+    <node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf" args="-sdf -file $(arg model_path) -x $(arg x) -y $(arg y)  -model $(arg model_name) "/>
+    <node name="go_to_goal_node" pkg="autonomous_tb" type="s4_go_to_goal_args.py" args="$(arg x) $(arg y)"/>
+    <node name="video_recorder" pkg="autonomous_tb" type="s3_video_recorder.py" output="screen"/>
+    
+    <!-- roslaunch autonomous_tb l7_introderRoom_spawning_recording.launch x:=-5.26 y:=0.2623 model_name:="bookshelf"  -->
+</launch>

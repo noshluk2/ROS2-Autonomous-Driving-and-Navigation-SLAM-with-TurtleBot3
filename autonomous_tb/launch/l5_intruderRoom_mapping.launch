@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<launch>
+
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+        <arg name="world_name" value="$(find autonomous_tb)/world/maze.world"/>
+    </include>
+    
+    <param name="robot_description" command="$(find xacro)/xacro  $(find turtlebot3_description)/urdf/turtlebot3_waffle_pi.urdf.xacro" />
+    
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher">
+        <param name="publish_frequency" type="double" value="50.0" />
+      </node>
+    
+    <node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf" args="-urdf -model turtlebot3_waffle_pi -param robot_description" />
+    
+    
+    <node pkg="gmapping" type="slam_gmapping" name="turtlebot3_slam_gmapping" output="screen">
+        <param name="base_frame" value="base_footprint"/>
+        <param name="odom_frame" value="odom"/>
+        <param name="map_frame"  value="map"/>
+        <rosparam command="load" file="$(find turtlebot3_slam)/config/gmapping_params.yaml" />
+      </node>
+      
+      <node pkg="rviz" type="rviz" name="rviz" required="true" args="-d $(find turtlebot3_slam)/rviz/turtlebot3_gmapping.rviz"/>
+   
+   
+    <node pkg="turtlebot3_teleop" type="turtlebot3_teleop_key" name="turtlebot3_teleop_keyboard"  output="screen"/>
+
+</launch>

@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<launch>
+
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    </include>
+    
+    <param name="robot_description" command="$(find xacro)/xacro  $(find turtlebot3_description)/urdf/turtlebot3_waffle_pi.urdf.xacro" />
+    <node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf" args="-urdf -model turtlebot3_waffle_pi -param robot_description" />
+    <node pkg="turtlebot3_teleop" type="turtlebot3_teleop_key" name="turtlebot3_teleop_keyboard"  output="screen"/>
+
+</launch>
