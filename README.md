@@ -1,4 +1,4 @@
-# ROS Autonomous Driving and Path Planning SLAM with TurtleBot3
+# ROS2 Autonomous Driving and Path Planning SLAM with TurtleBot3 using NAV2
 
 <details open="open">
   <summary>Table of Contents</summary>
@@ -56,7 +56,7 @@ echo "source /path/to/ros2_ws/install/setup.bash" >> ~/.bashrc
 
 ---
 ## Features
-* **Turtlbot3 World Navigation using NAV2**
+* **Turtlebot3 World Navigation using NAV2**
   -  ![alt text](https://github.com/noshluk2/ROS2-Autonomous-Driving-and-Navigation-SLAM-with-TurtleBot3/blob/master/image_resources/Nav2_Multi_goals.gif)
 * **Maze Solving using Commander API and NAV2**
   -  ![alt text](https://github.com/noshluk2/ROS2-Autonomous-Driving-and-Navigation-SLAM-with-TurtleBot3/blob/master/image_resources/maze_solving.gif)
