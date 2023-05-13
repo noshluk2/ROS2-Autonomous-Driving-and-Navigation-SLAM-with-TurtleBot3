@@ -18,7 +18,7 @@
 This is repository for the course **ROS2 Autonomous Driving and SLAM using NAV2 with TurtleBot3** availble at Udemy . Complete source code is open sourced.
 
  ![alt text](https://github.com/noshluk2/ROS2-Autonomous-Driving-and-Navigation-SLAM-with-TurtleBot3/blob/master/image_resources/main_cover.png)
-- **[[Get course Here]](https://www.udemy.com/course/robotics-with-ros-autonomous-driving-and-path-planning-slam/?couponCode=NAV2_LAUNCH)**
+- **[[Get course Here]](https://www.udemy.com/course/robotics-with-ros-autonomous-driving-and-path-planning-slam/?couponCode=0E3DA22151FB70543D74)**
 ----
 ## Using this Repository
 * Move into your workspace/src folder
@@ -75,7 +75,7 @@ echo "source /path/to/ros2_ws/install/setup.bash" >> ~/.bashrc
 ## Link to the Course
 Below is a discounted coupon for people who want to take the course in which more explaination to this code has been added
 
-**[[Get course Here]](https://www.udemy.com/course/robotics-with-ros-autonomous-driving-and-path-planning-slam/?couponCode=NAV2_LAUNCH)**
+**[[Get course Here]](https://www.udemy.com/course/robotics-with-ros-autonomous-driving-and-path-planning-slam/?couponCode=0E3DA22151FB70543D74)**
 
 ----
 
